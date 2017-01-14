@@ -1,0 +1,4 @@
+-r base.txt
+
+# Debugging only on local environment
+django-extensions
