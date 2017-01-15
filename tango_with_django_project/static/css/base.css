@@ -14,3 +14,9 @@ p {
 img {
     margin-top: 5px;
 }
+
+span {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
