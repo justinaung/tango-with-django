@@ -5,21 +5,22 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Rango</title>
+        <title>About</title>
         <!-- CSS -->
         <link rel="stylesheet" href="{% static "css/base.css" %}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
     </head>
     <body>
-        <h1>Rango says...</h1>
+        <h1>About</h1>
         <div>
-            <p>hey there partner! <br>
-                <strong>{{ boldmessage }}</strong><br></p>
+            <p>This tutorial has been put together by Justin.</p>
         </div>
-        <div class="foot">
-            <a href="/rango/about">About</a><br>
-            <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango">
+        <div>
+            <a href="/rango/">Rango</a>
+        </div>
+        <div>
+            <img src="{{ MEDIA_URL }}fat_cat.jpg" alt="Fat Cat">
         </div>
     </body>
 </html>
