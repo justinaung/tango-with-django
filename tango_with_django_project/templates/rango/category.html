@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rango</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+</head>
+<body>
+<div>
+    {% if category %}
+        <h1>{{ category.name }}</h1>
+        {% if pages %}
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No pages currently in this category.</strong>
+        {% endif %}
+    {% else %}
+        <strong>The specified category does not exist!</strong>
+    {% endif %}
+</div>
+</body>
+</html>

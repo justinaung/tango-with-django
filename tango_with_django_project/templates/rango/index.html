@@ -3,36 +3,38 @@
 {% load staticfiles %}
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Rango</title>
-        <!-- CSS -->
-        <link rel="stylesheet" href="{% static "css/style.css" %}">
+<head>
+    <meta charset="utf-8">
+    <title>Rango</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Rango says...</h1>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+</head>
+<body>
+<h1>Rango says...</h1>
 
-        <p>Hey there partner!<br>Here's your categories.</p>
+<p>Hey there partner!<br>Here's your categories.</p>
 
-        <div class="categories">
-            {% if categories %}
-            <ul>
-                {%  for category in categories %}
-                    <li>{{ category.name }}</li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>There are no categories present.</strong>
-            {% endif %}
-        </div>
+<div class="categories">
+    {% if categories %}
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no categories present.</strong>
+    {% endif %}
+</div>
 
-        <div class="foot">
-            <a href="/rango/about">About</a><br>
-            <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango">
-        </div>
-    </body>
+<div class="foot">
+    <a href="/rango/about">About</a><br>
+    <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango">
+</div>
+</body>
 </html>
