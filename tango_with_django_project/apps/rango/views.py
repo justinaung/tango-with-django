@@ -1,7 +1,25 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 
 from apps.rango.forms import CategoryForm
 from apps.rango.models import Category, Page
+from .serializers import CategorySerializer, PageSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows categories to be viewed or edited.
+    """
+    queryset = Category.objects.all().order_by('-likes')
+    serializer_class = CategorySerializer
+
+
+class PageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows pages to be viewed or edited.
+    """
+    queryset = Page.objects.all().order_by('-views')
+    serializer_class = PageSerializer
 
 
 def index(request):
