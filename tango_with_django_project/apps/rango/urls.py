@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'pages', views.PageViewSet)
 
+app_name = 'rango'
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^$', views.index, name='index'),
