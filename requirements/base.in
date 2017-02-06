@@ -1,3 +1,7 @@
 # Django Core
 Django
 django-environ
+
+
+# Django REST framework
+djangorestframework
