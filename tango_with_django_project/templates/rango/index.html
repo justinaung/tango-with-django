@@ -19,11 +19,12 @@
 <p>Hey there partner!<br>Here's your categories.</p>
 
 <div class="categories">
+    <h3>Most Liked Categories</h3>
     {% if categories %}
         <ul>
             {% for category in categories %}
                 <li>
-                    <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+                    <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -31,7 +32,16 @@
         <strong>There are no categories present.</strong>
     {% endif %}
 
-    <!-- TODO Include heading for Most Liked Categories and Most Viewed Pages (pg 75) -->
+    <h3>Most Viewed Pages</h3>
+    {% if pages %}
+        <ul>
+            {% for page in pages %}
+                <li>
+                    <a href="{{ page.url }}">{{ page.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
 
 <div class="foot">
