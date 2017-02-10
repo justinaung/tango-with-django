@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 
-from apps.rango.forms import CategoryForm
+from apps.rango.forms import CategoryForm, PageForm
 from apps.rango.models import Category, Page
 from .serializers import CategorySerializer, PageSerializer
 
@@ -50,11 +50,13 @@ def show_category(request, category_name_slug):
     try:
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
+        # So the .get() method returns one model instance or raises an
+        # exception.
         category = Category.objects.get(slug=category_name_slug)
 
         # Retrieve all of the associated pages.
-        # Note that filter() will return a list of page objects or an empty list.
+        # Note that filter() will return a list of page objects or an empty
+        # list.
         pages = Page.objects.filter(category=category)
 
         # Adds our results list to the template context under name pages.
@@ -98,3 +100,31 @@ def add_category(request):
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
     return render(request, 'rango/add_category.html', {'form': form})
+
+
+def add_page(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        print("Hello")
+    except Category.DoesNotExist:
+        category = None
+
+    form = PageForm()
+
+    if request.method == 'POST':
+        print("POST")
+        form = PageForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                page = form.save(commit=False)
+                page.category = category
+                page.views = 0
+                page.save()
+                print("FORM SAVED")
+                return show_category(request, category_name_slug)
+        else:
+            print(form.errors)
+
+    context_dict = {'form':form, 'category': category}
+    return render(request, 'rango/add_page.html', context_dict)
