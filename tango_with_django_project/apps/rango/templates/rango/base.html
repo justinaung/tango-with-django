@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load rango_template_tags %}
 
 <html>
     <head>
@@ -18,6 +19,11 @@
         <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
     </head>
     <body>
+        <div>
+            {% block sidebar_block %}
+                {% get_category_list category %}
+            {% endblock %}
+        </div>
         <div>
             {% block body_block %}
             {% endblock %}
