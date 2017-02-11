@@ -1,38 +1,28 @@
-<!DOCTYPE html>
+{% extends 'rango/base.html' %}
 
-{% load staticfiles %}
+{% block title_block %}
+    {{ category.name }}
+{% endblock %}
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Rango</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
-</head>
-<body>
-<div>
+{% block body_block %}
+    <div class="categories">
     {% if category %}
         <h1>{{ category.name }}</h1>
+
         {% if pages %}
-            <ul>
-                {% for page in pages %}
-                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <strong>No pages currently in this category.</strong>
+        <strong>No pages currently in this category.</strong>
         {% endif %}
+
+        <a class="foot" href="{% url 'rango:add_page' category.slug %}">Add Page</a>
+
     {% else %}
         <strong>The specified category does not exist!</strong>
     {% endif %}
-</div>
-<div>
-    <a href="{% url 'rango:add_page' category.slug %}">Add Page</a><br>
-    <a href="{% url 'rango:index' %}">Back to Rango</a>
-</div>
-</body>
-</html>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Rango -
+            {% block title_block %}
+                How to Tango with Django!
+            {% endblock %}
+        </title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+        <br>
+        <div class="foot">
+            <a href="{% url 'rango:add_category' %}">Add New Category</a> |
+            <a href="{% url 'rango:about' %}">About</a> |
+            <a href="{% url 'rango:index' %}">Rango</a>
+        </div>
+    </body>
+</html>
