@@ -1,7 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.models import UserProfile
 
-from apps.rango.models import Category, Page
+from apps.rango.models import Category, Page, UserProfile
 
 
 class PageAdmin(admin.ModelAdmin):
