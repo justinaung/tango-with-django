@@ -5,3 +5,9 @@ django-environ
 
 # Django REST framework
 djangorestframework
+
+# Bcrypt
+bcrypt
+
+# Python Imaging Library
+Pillow
