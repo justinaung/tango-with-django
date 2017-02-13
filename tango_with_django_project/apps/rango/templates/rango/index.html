@@ -4,7 +4,11 @@
 {% block body_block%}
     <h1>Rango says...</h1>
 
-    <p>Hey there partner!<br>Here's your categories and pages.</p>
+    {% if user.is_authenticated %}
+        howdy {{ user.username }}
+    {% else %}
+        hey there partner!
+    {% endif %}
 
     <div class="categories">
         <h3>Most Liked Categories</h3>
@@ -29,6 +33,8 @@
                     </li>
                 {% endfor %}
             </ul>
+        {% else %}
+            <strong>There are no pages present.</strong>
         {% endif %}
     </div>
 
