@@ -11,3 +11,7 @@ bcrypt
 
 # Python Imaging Library
 Pillow
+
+# Django Registration
+django-registration-redux
+
