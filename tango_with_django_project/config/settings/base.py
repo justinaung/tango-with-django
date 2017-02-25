@@ -34,6 +34,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # APP CONFIGURATION
 # --------------------------------------------------------------
