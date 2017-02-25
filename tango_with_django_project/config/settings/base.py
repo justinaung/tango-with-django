@@ -34,13 +34,14 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/rango/login/'
 
 # APP CONFIGURATION
 # --------------------------------------------------------------
 
 DJANGO_APPS = [
     'django.contrib.admin',
+    'django.contrib.sites',
+    'registration',  # Need this 3rd party app to be installed above auth
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -146,3 +147,22 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+
+
+# Registration
+
+# If True, users can register
+REGISTRATION_OPEN = True
+
+# One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 7
+
+# If True, the user will be automatically logged in.
+REGISTRATION_AUTO_LOGIN = True
+
+# The page you want users to arrive at after they successfully log in
+LOGIN_REDIRECT_URL = '/rango/'
+
+# The page users are directed to if they are not logged in,
+# and are trying to access pages requiring authentication
+LOGIN_URL = '/accounts/login/'
