@@ -1,11 +1,11 @@
-{% extends 'rango/base.html' %}
+{% extends 'rango/base_bootstrap.html' %}
 
 {% block title_block %}
     {{ category.name }}
 {% endblock %}
 
 {% block body_block %}
-    <div class="categories">
+    <div>
     {% if category %}
         <h1>{{ category.name }}</h1>
 
