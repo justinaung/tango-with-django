@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
@@ -87,6 +87,13 @@ def show_category(request, category_name_slug):
         # the template will display the "no category" message for us.
         context_dict['category'] = None
         context_dict['pages'] = None
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = run_query(query)
+        context_dict['result_list'] = result_list
+        context_dict['query'] = query
 
     # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
@@ -193,3 +200,18 @@ def search(request):
             'query': query,
         }
     return render(request, 'rango/search.html', context_dict)
+
+
+def track_url(request):
+    page_id = None
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views += 1
+                page.save()
+                return redirect(page.url)
+            except Page.DoesNotExist:
+                pass
+    return redirect('index')
