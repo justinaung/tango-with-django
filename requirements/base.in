@@ -15,3 +15,6 @@ Pillow
 # Django Registration
 django-registration-redux
 
+# requests
+requests
+

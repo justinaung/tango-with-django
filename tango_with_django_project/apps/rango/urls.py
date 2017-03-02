@@ -8,11 +8,12 @@ router.register(r'pages', views.PageViewSet)
 
 app_name = 'rango'
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about, name='about'),
 
     url(r'^add_category/$', views.add_category, name='add_category'),
+
+    url(r'^api/', include(router.urls)),
 
     url(
         r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$',
@@ -27,4 +28,6 @@ urlpatterns = [
     ),
 
     url(r'^restricted/$', views.restricted, name='restricted'),
+
+    url(r'^search/$', views.search, name='search'),
 ]

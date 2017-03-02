@@ -13,4 +13,5 @@ djangorestframework==3.5.3
 olefile==0.44             # via pillow
 pillow==4.0.0
 pycparser==2.17           # via cffi
+requests==2.13.0
 six==1.10.0               # via bcrypt, django-environ

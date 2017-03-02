@@ -154,3 +154,6 @@ db.sqlite3
 media
 
 # End of https://www.gitignore.io/api/python,pycharm,django
+
+# Keep the keys safe
+*.key

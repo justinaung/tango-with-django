@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from apps.rango.forms import CategoryForm, PageForm
 from apps.rango.models import Category, Page
 from .serializers import CategorySerializer, PageSerializer
+from .webhose_search import run_query
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -177,3 +178,18 @@ def _get_server_side_cookie(request, cookie, default_val=None):
     if not val:
         val = default_val
     return val
+
+
+def search(request):
+    context_dict = dict()
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            result_list = run_query(query)
+
+        context_dict = {
+            'result_list': result_list,
+            'query': query,
+        }
+    return render(request, 'rango/search.html', context_dict)
