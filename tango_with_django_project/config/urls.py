@@ -23,12 +23,12 @@ from apps.rango import views
 from registration.backends.simple.views import RegistrationView
 
 
-# Create a new class that redirects the user to the index page,
+# Create a new class that redirects the user to the profile register page,
 # if successful at logging
 class MyRegistrationView(RegistrationView):
 
     def get_success_url(self, user):
-        return '/rango/'
+        return 'rango:register_profile'
 
 
 urlpatterns = [

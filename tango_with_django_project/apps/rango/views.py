@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
 
-from apps.rango.forms import CategoryForm, PageForm
+from apps.rango.forms import CategoryForm, PageForm, UserProfileForm
 from apps.rango.models import Category, Page
 from .serializers import CategorySerializer, PageSerializer
 from .webhose_search import run_query
@@ -88,12 +88,17 @@ def show_category(request, category_name_slug):
         context_dict['category'] = None
         context_dict['pages'] = None
 
+    # create a default query based on the category name
+    # to be shown in the search box
+    context_dict['query'] = category.name if category else None
+
+    result_list = list()
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
             result_list = run_query(query)
-        context_dict['result_list'] = result_list
-        context_dict['query'] = query
+            context_dict['result_list'] = result_list
+            context_dict['query'] = query
 
     # Go render the response and return it to the client.
     return render(request, 'rango/category.html', context_dict)
@@ -204,14 +209,37 @@ def search(request):
 
 def track_url(request):
     page_id = None
+    url = 'index'
     if request.method == 'GET':
         if 'page_id' in request.GET:
             page_id = request.GET['page_id']
+
             try:
                 page = Page.objects.get(id=page_id)
                 page.views += 1
                 page.save()
-                return redirect(page.url)
+                url = page.url
             except Page.DoesNotExist:
                 pass
-    return redirect('index')
+
+    return redirect(url)
+
+
+@login_required
+def register_profile(request):
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+
+            return redirect('index')
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form}
+
+    return render(request, 'rango/profile_registration.html', context_dict)
