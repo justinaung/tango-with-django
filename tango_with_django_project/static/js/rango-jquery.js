@@ -2,13 +2,15 @@ $(document).ready( function() {
     $("#about-btn").click( function(event) {
         msgstr = $("#msg").html()
         msgstr = msgstr + "ooo"
-        $('#msg').html()
+        $('#msg').html(msgstr)
     });
 
-    $("p").hover( function() {
+    $("p").hover(
+        function() {
         $(this).css('color', 'red');
-    },
-    function() {
+        },
+        function() {
         $(this).css('color', 'black');
-    });
+        }
+    );
 });

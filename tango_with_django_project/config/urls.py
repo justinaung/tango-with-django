@@ -33,7 +33,7 @@ class MyRegistrationView(RegistrationView):
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^rango/', include('apps.rango.urls')),
+    url(r'^rango/', include('apps.rango.urls', namespace='rango')),
     url(r'^accounts/register/$',
         MyRegistrationView.as_view(),
         name='registration_register'),
